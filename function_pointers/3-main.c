@@ -1,34 +1,37 @@
-#include "function_pointers.h"
+#include "3-calc.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
- * main - simple calculator using function pointers
- * @argc: count
- * @argv: vector [num1, op, num2]
- * Return: 0 on success, exits with 98/99/100 on error
+ * main - simple calculator
+ * @argc: argument count
+ * @argv: argument vector
+ *
+ * Return: 0 on success
  */
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-	int a, b, res;
-	int (*op)(int, int);
+    int num1, num2, result;
+    int (*op)(int, int);
 
-	if (argc != 4)
-	{
-		print_string("Error\n");
-		exit(98);
-	}
+    if (argc != 4)
+    {
+        printf("Error\n");
+        exit(98);
+    }
 
-	op = get_op_func(argv[2]);
-	if (!op)
-	{
-		print_string("Error\n");
-		exit(99);
-	}
+    op = get_op_func(argv[2]);
+    if (!op)
+    {
+        printf("Error\n");
+        exit(99);
+    }
 
-	a = _atoi(argv[1]);
-	b = _atoi(argv[3]);
-	res = op(a, b);
+    num1 = atoi(argv[1]);
+    num2 = atoi(argv[3]);
 
-	print_number(res);
-	_putchar('\n');
-	return (0);
+    result = op(num1, num2);
+    printf("%d\n", result);
+
+    return (0);
 }
